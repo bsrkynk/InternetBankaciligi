@@ -11,8 +11,7 @@ namespace InternetBankaciligi.Entities.Concrete
     {
         public int UserId { get; set; }
         public User User { get; set; }
-        public int AccountTypeId { get; set; }
-        public AccountType AccountType { get; set; }
+        public string AccountTypeName { get; set; }
         public ICollection<AmountType> AmountTypes { get; set; }
         public ICollection<Transaction> Transactions { get; set; }
     }

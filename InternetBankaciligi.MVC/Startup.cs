@@ -16,24 +16,30 @@ namespace InternetBankaciligi.MVC
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession();                  //Session için eklendi
+            services.AddDistributedMemoryCache();   //Session için eklendi
+
+            services.AddControllersWithViews();
+            //services.LoadMyServices();
+            //services.AddScoped<PortfolioViewModel, PortfolioViewModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseStaticFiles();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
             app.UseRouting();
-
+            app.UseSession();// session için eklendi
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllerRoute(
+                  name: "default",
+                  pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
