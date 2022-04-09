@@ -1,17 +1,16 @@
 ﻿using InternetBankaciligi.Shared.Entities.Abstract;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace InternetBankaciligi.Entities.Concrete
 {
-   public class Transaction: EntityBase, IEntity
+    public class Transaction : EntityBase, IEntity
     {
-        public double Amount { get; set; }
-        public int TransactionTypeId { get; set; }
-        public TransactionType TransactionType { get; set; }
+        public string Amount { get; set; }
+        public string TransactionTypeName { get; set; }
         public int AccountId { get; set; }
         public Account Account { get; set; }
         public int AmountTypeId { get; set; }

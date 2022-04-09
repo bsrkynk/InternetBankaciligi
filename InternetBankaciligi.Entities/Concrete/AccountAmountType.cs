@@ -9,7 +9,7 @@ namespace InternetBankaciligi.Entities.Concrete
 {
     public class AccountAmountType: EntityBase, IEntity
     {
-        public double Amount { get; set; }
+        public string Amount { get; set; }
         public int AccountId { get; set; }
         public Account Account { get; set; }
         public int AmountTypeId { get; set; }
