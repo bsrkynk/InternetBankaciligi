@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBankaciligi.Shared", "InternetBankaciligi.Shared\InternetBankaciligi.Shared.csproj", "{C55E526E-CA41-4EAB-875A-E54A048D24AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternetBankaciligi.Shared", "InternetBankaciligi.Shared\InternetBankaciligi.Shared.csproj", "{C55E526E-CA41-4EAB-875A-E54A048D24AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBankaciligi.Entities", "InternetBankaciligi.Entities\InternetBankaciligi.Entities.csproj", "{0A798079-98BD-4605-B63B-7C0F6957E26B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternetBankaciligi.Entities", "InternetBankaciligi.Entities\InternetBankaciligi.Entities.csproj", "{0A798079-98BD-4605-B63B-7C0F6957E26B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBankaciligi.Data", "InternetBankaciligi.Data\InternetBankaciligi.Data.csproj", "{BCD4EDD3-DAEB-464A-BDC1-5DD956F4E4FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternetBankaciligi.Data", "InternetBankaciligi.Data\InternetBankaciligi.Data.csproj", "{BCD4EDD3-DAEB-464A-BDC1-5DD956F4E4FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBankaciligi.MVC", "InternetBankaciligi.MVC\InternetBankaciligi.MVC.csproj", "{F42EC0F8-6482-4358-B334-AC9708F45A54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternetBankaciligi.MVC", "InternetBankaciligi.MVC\InternetBankaciligi.MVC.csproj", "{F42EC0F8-6482-4358-B334-AC9708F45A54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBankaciligi.Services", "InternetBankaciligi.Services\InternetBankaciligi.Services.csproj", "{3DC17E8C-1E16-4587-AF92-9E1F8F8E28BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternetBankaciligi.Services", "InternetBankaciligi.Services\InternetBankaciligi.Services.csproj", "{3DC17E8C-1E16-4587-AF92-9E1F8F8E28BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBankaciligi.Host", "InternetBankaciligi.Host\InternetBankaciligi.Host.csproj", "{57F9A58C-841D-44AA-B115-27F84FBFF26D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{3DC17E8C-1E16-4587-AF92-9E1F8F8E28BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DC17E8C-1E16-4587-AF92-9E1F8F8E28BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DC17E8C-1E16-4587-AF92-9E1F8F8E28BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57F9A58C-841D-44AA-B115-27F84FBFF26D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F9A58C-841D-44AA-B115-27F84FBFF26D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57F9A58C-841D-44AA-B115-27F84FBFF26D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57F9A58C-841D-44AA-B115-27F84FBFF26D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
