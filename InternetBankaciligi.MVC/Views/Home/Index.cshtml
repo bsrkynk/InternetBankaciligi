@@ -43,7 +43,9 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                    <li><a href=@Url.Action("Index", "Home") class="nav-link scrollto active">Anasayfa</a></li>
+                    <li><a href=@Url.Action("Index", "Login") class="btn-get-started scrollto">İnternet Bankacılığı</a></li>
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -61,7 +63,7 @@
             <div class="hero-info" data-aos="zoom-in" data-aos-delay="100">
                 <h2>Her an dilediğiniz yerde<br><span>xxxBank'lı</span><br>olun!</h2>
                 <div>
-                    <a href="#about" class="btn-get-started scrollto">xxxBank Müşterisi olmak için tıklayın</a>
+                    <a href=@Url.Action("Index", "Register") class="btn-get-started scrollto">xxxBank Müşterisi olmak için tıklayın</a>
                 </div>
             </div>
 
