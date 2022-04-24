@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InternetBankaciligi.MVC.Controllers
 {
-    public class RegisterController : Controller
+    public class Varliklar : Controller
     {
         public IActionResult Index()
         {

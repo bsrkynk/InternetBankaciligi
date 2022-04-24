@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace InternetBankaciligi.Data.Abstract
 {
-    public interface IUserRepository: IEntityRepository<User>
+    public interface IUserRepository : IEntityRepository<User>
     {
+        Task<int> SignInUser(User user);
     }
 }

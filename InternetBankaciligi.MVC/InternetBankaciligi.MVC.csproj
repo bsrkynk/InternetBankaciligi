@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InternetBankaciligi.Entities\InternetBankaciligi.Entities.csproj" />
     <ProjectReference Include="..\InternetBankaciligi.Host\InternetBankaciligi.Host.csproj" />
   </ItemGroup>
 

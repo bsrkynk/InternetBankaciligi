@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InternetBankaciligi.Host.Extensions;
 
 namespace InternetBankaciligi.MVC
 {
@@ -20,7 +21,7 @@ namespace InternetBankaciligi.MVC
             services.AddDistributedMemoryCache();   //Session için eklendi
 
             services.AddControllersWithViews();
-            //services.LoadMyServices();
+            services.LoadMyServices();
             //services.AddScoped<PortfolioViewModel, PortfolioViewModel>();
         }
 
