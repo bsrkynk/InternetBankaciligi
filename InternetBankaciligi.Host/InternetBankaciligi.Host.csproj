@@ -7,8 +7,6 @@
   <ItemGroup>
     <Folder Include="Transactions\Concrete\" />
     <Folder Include="Transactions\Abstract\" />
-    <Folder Include="User\Abstract\" />
-    <Folder Include="User\Concrete\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InternetBankaciligi.Data\InternetBankaciligi.Data.csproj" />
     <ProjectReference Include="..\InternetBankaciligi.Entities\InternetBankaciligi.Entities.csproj" />
   </ItemGroup>
 

@@ -1,0 +1,42 @@
+﻿@model InternetBankaciligi.Entities.Dtos.UserAddDto;
+@{
+}
+<link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/assets/css/userlogin.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-body">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4"><span class="fas fa-house-user"></span> Kayıt Formu </h3></div>
+                    @using (Html.BeginForm("Register", "Login", FormMethod.Post))
+                    {
+                        <div class="form-sample">
+                             <div class="form-group">
+                                <b>@Html.LabelFor(x => x.TCNo)</b>
+                                @Html.TextBoxFor(x => x.TCNo, new { @class = "form-control" })<br />
+                            </div>
+                            <div class="form-group">
+                                <b>@Html.LabelFor(x => x.Name)</b>
+                                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })<br />
+                            </div>
+                            <div class="form-group">
+                                <b>@Html.LabelFor(x => x.Surname)</b>
+                                @Html.TextBoxFor(x => x.Surname, new { @class = "form-control" })<br />
+                            </div>                          
+                            <div class="form-group">
+                                <b>@Html.LabelFor(x => x.UserPassword)</b>
+                                @Html.TextBoxFor(x => x.UserPassword, new { @class = "form-control", placeholder = "Parola", type = "Password" })<br />
+                            </div>
+                        </div>
+                        <div class="text-center" style="background-color:white">
+                            <button class="btn btn-info">Kayıt Ol</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
