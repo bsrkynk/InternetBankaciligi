@@ -11,26 +11,29 @@ namespace InternetBankaciligi.Data.Concrete.EntityFramework.Contexts
 {
     public class InternetBankaciligiContext: DbContext
     {
-        public DbSet<AccountAmountType> AccountAmountTypes { get; set; }
+        public DbSet<AmountTypeWallet> AccountAmountTypes { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<AmountType> AmountTypes { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Wallet> Wallets { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "Server=(localdb)\\MSSQLLocalDB;Database=InternetBankaciligi;Trusted_Connection=True;Connect Timeout=30;MultipleActiveResultSets=True;");
+                // "Server=(localdb)\\MSSQLLocalDB;Database=InternetBankaciligi;Trusted_Connection=True;Connect Timeout=30;MultipleActiveResultSets=True;");
+                "Server=.;Database=InternetBankaciligi;Trusted_Connection=True;Connect Timeout=30;MultipleActiveResultSets=True;");
             optionsBuilder.EnableSensitiveDataLogging();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.ApplyConfiguration(new AccountAmountTypeMap());
+            modelBuilder.ApplyConfiguration(new AmountTypeWalletMap());
             modelBuilder.ApplyConfiguration(new AccountMap());
             modelBuilder.ApplyConfiguration(new AmountTypeMap());
             modelBuilder.ApplyConfiguration(new TransactionMap());
             modelBuilder.ApplyConfiguration(new UserMap());
+            modelBuilder.ApplyConfiguration(new WalletMap());
 
         }
 

@@ -10,8 +10,10 @@ namespace InternetBankaciligi.Entities.Concrete
     public class AmountType: EntityBase, IEntity
     {
         public string AmountName { get; set; }
-        public ICollection<Account> Accounts { get; set; }
-        public ICollection<Transaction> Transactions { get; set; }
+        public string AmountPrice { get; set; } //işleme giren paranın o anki karşılığı
+        public ICollection<Wallet> Wallets { get; set; } //bir walletta çok sayıda para tipi olabilir.
+
+
 
 
     }

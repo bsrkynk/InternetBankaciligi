@@ -3,14 +3,16 @@ using InternetBankaciligi.Data.Concrete.EntityFramework.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InternetBankaciligi.Data.Migrations
 {
     [DbContext(typeof(InternetBankaciligiContext))]
-    partial class InternetBankaciligiContextModelSnapshot : ModelSnapshot
+    [Migration("20220506233851_degisiklikler3")]
+    partial class degisiklikler3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,7 +168,8 @@ namespace InternetBankaciligi.Data.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.HasIndex("TransactionTypeName");
+                    b.HasIndex("TransactionTypeName")
+                        .IsUnique();
 
                     b.ToTable("Transactions");
                 });

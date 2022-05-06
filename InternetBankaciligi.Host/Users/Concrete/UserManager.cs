@@ -22,22 +22,21 @@ namespace InternetBankaciligi.Host.Users.Concrete
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Add(UserAddDto userAddDto)
+        public async  Task<int> Add(UserAddDto userAddDto)
         {
-            await _unitOfWork.Users.AddAsync(new User
-            {
-                Name = userAddDto.Name,
-                Surname = userAddDto.Surname,
-                TCNo = CustomerSecurityOperationHelper.MaskTCNo(userAddDto.TCNo),
-                CustomerNo = CustomerSecurityOperationHelper.GenerateCustomerNumber(userAddDto.TCNo),
-                Password = CustomerSecurityOperationHelper.ComputeSha256HashPassword(userAddDto.UserPassword),
-                Accounts = null,
-                IsActive = true,
-                IsDeleted = false
+            User user = new User();
 
-            });
+            user.Name = userAddDto.Name;
+            user.Surname = userAddDto.Surname;
+            user.TCNo = CustomerSecurityOperationHelper.MaskTCNo(userAddDto.TCNo);
+            user.CustomerNo = CustomerSecurityOperationHelper.GenerateCustomerNumber(userAddDto.TCNo);
+            user.Password = CustomerSecurityOperationHelper.ComputeSha256HashPassword(userAddDto.UserPassword);
+            user.Accounts = null;
+            user.IsActive = true;
+            user.IsDeleted = false;
+            await _unitOfWork.Users.AddAsync(user);
             await _unitOfWork.SaveAsync();
-
+            return user.Id;
         }
 
         public async Task<int> SignInUser(SignInUserDto signInUserDto)

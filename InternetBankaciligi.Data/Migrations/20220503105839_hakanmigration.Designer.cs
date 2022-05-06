@@ -3,14 +3,16 @@ using InternetBankaciligi.Data.Concrete.EntityFramework.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InternetBankaciligi.Data.Migrations
 {
     [DbContext(typeof(InternetBankaciligiContext))]
-    partial class InternetBankaciligiContextModelSnapshot : ModelSnapshot
+    [Migration("20220503105839_hakanmigration")]
+    partial class hakanmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,19 +20,19 @@ namespace InternetBankaciligi.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AmountTypeWallet", b =>
+            modelBuilder.Entity("AccountAmountType", b =>
                 {
+                    b.Property<int>("AccountsId")
+                        .HasColumnType("int");
+
                     b.Property<int>("AmountTypesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WalletsId")
-                        .HasColumnType("int");
+                    b.HasKey("AccountsId", "AmountTypesId");
 
-                    b.HasKey("AmountTypesId", "WalletsId");
+                    b.HasIndex("AmountTypesId");
 
-                    b.HasIndex("WalletsId");
-
-                    b.ToTable("AmountTypeWallet");
+                    b.ToTable("AccountAmountType");
                 });
 
             modelBuilder.Entity("InternetBankaciligi.Entities.Concrete.Account", b =>
@@ -40,8 +42,10 @@ namespace InternetBankaciligi.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AccountName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("AccountTypeName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -52,14 +56,46 @@ namespace InternetBankaciligi.Data.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WalletId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountTypeName")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("InternetBankaciligi.Entities.Concrete.AccountAmountType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Amount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AmountTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("AmountTypeId");
+
+                    b.ToTable("AccountAmountTypes");
                 });
 
             modelBuilder.Entity("InternetBankaciligi.Entities.Concrete.AmountType", b =>
@@ -74,9 +110,6 @@ namespace InternetBankaciligi.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("AmountPrice")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -89,43 +122,6 @@ namespace InternetBankaciligi.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("AmountTypes");
-                });
-
-            modelBuilder.Entity("InternetBankaciligi.Entities.Concrete.AmountTypeWallet", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AmountOfAmountType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("AmountTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AvarageBuyPrice")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("TotalWelthOfAmountType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("WalletId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AmountTypeId");
-
-                    b.HasIndex("WalletId");
-
-                    b.ToTable("AmountTypeWallets");
                 });
 
             modelBuilder.Entity("InternetBankaciligi.Entities.Concrete.Transaction", b =>
@@ -142,20 +138,14 @@ namespace InternetBankaciligi.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AmountTypeName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AmountTypeId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<string>("TotalPrice")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TransactionPrice")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TransactionTypeName")
                         .IsRequired()
@@ -166,7 +156,10 @@ namespace InternetBankaciligi.Data.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.HasIndex("TransactionTypeName");
+                    b.HasIndex("AmountTypeId");
+
+                    b.HasIndex("TransactionTypeName")
+                        .IsUnique();
 
                     b.ToTable("Transactions");
                 });
@@ -220,44 +213,17 @@ namespace InternetBankaciligi.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("InternetBankaciligi.Entities.Concrete.Wallet", b =>
+            modelBuilder.Entity("AccountAmountType", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("TotalWealth")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountId")
-                        .IsUnique();
-
-                    b.ToTable("Wallets");
-                });
-
-            modelBuilder.Entity("AmountTypeWallet", b =>
-                {
-                    b.HasOne("InternetBankaciligi.Entities.Concrete.AmountType", null)
+                    b.HasOne("InternetBankaciligi.Entities.Concrete.Account", null)
                         .WithMany()
-                        .HasForeignKey("AmountTypesId")
+                        .HasForeignKey("AccountsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InternetBankaciligi.Entities.Concrete.Wallet", null)
+                    b.HasOne("InternetBankaciligi.Entities.Concrete.AmountType", null)
                         .WithMany()
-                        .HasForeignKey("WalletsId")
+                        .HasForeignKey("AmountTypesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -273,23 +239,23 @@ namespace InternetBankaciligi.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("InternetBankaciligi.Entities.Concrete.AmountTypeWallet", b =>
+            modelBuilder.Entity("InternetBankaciligi.Entities.Concrete.AccountAmountType", b =>
                 {
+                    b.HasOne("InternetBankaciligi.Entities.Concrete.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("InternetBankaciligi.Entities.Concrete.AmountType", "AmountType")
                         .WithMany()
                         .HasForeignKey("AmountTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InternetBankaciligi.Entities.Concrete.Wallet", "Wallet")
-                        .WithMany()
-                        .HasForeignKey("WalletId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Account");
 
                     b.Navigation("AmountType");
-
-                    b.Navigation("Wallet");
                 });
 
             modelBuilder.Entity("InternetBankaciligi.Entities.Concrete.Transaction", b =>
@@ -300,25 +266,25 @@ namespace InternetBankaciligi.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Account");
-                });
-
-            modelBuilder.Entity("InternetBankaciligi.Entities.Concrete.Wallet", b =>
-                {
-                    b.HasOne("InternetBankaciligi.Entities.Concrete.Account", "Account")
-                        .WithOne("Wallet")
-                        .HasForeignKey("InternetBankaciligi.Entities.Concrete.Wallet", "AccountId")
+                    b.HasOne("InternetBankaciligi.Entities.Concrete.AmountType", "AmountType")
+                        .WithMany("Transactions")
+                        .HasForeignKey("AmountTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Account");
+
+                    b.Navigation("AmountType");
                 });
 
             modelBuilder.Entity("InternetBankaciligi.Entities.Concrete.Account", b =>
                 {
                     b.Navigation("Transactions");
+                });
 
-                    b.Navigation("Wallet");
+            modelBuilder.Entity("InternetBankaciligi.Entities.Concrete.AmountType", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 
             modelBuilder.Entity("InternetBankaciligi.Entities.Concrete.User", b =>

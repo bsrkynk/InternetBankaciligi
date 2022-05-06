@@ -32,7 +32,8 @@ namespace InternetBankaciligi.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(UserAddDto userAddDto) //async yapılmazsa kaydetmiyor
         {
-            await _userService.Add(userAddDto);
+           int addedUserId= await _userService.Add(userAddDto);
+            SaveDataWithSession(addedUserId);
             return Redirect("/Varliklar/Index/");
         }
         [HttpPost]
@@ -58,7 +59,7 @@ namespace InternetBankaciligi.MVC.Controllers
 
         private void SaveDataWithSession(int result)
         {
-            HttpContext.Session.SetInt32("USERNAME", result); //login olan kullanıcının usernameini sessiona kaydediyor
+            HttpContext.Session.SetInt32("USERID", result); //login olan kullanıcının usernameini sessiona kaydediyor
 
         }
     }

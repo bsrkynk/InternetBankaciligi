@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace InternetBankaciligi.Data.Concrete.EntityFramework.Repositories
 {
-    public class AccountAmountTypeRepository: EfEntityRepositoryBase<AccountAmountType>, IAccountAmountTypeRepository
+    public class WalletRepository: EfEntityRepositoryBase<Wallet>, IWalletRepository
     {
-        public AccountAmountTypeRepository(DbContext context) : base(context)
+        public WalletRepository(DbContext context) : base(context)
         {
         }
     }

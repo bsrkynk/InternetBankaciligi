@@ -9,16 +9,14 @@ using System.Threading.Tasks;
 
 namespace InternetBankaciligi.Data.Concrete.EntityFramework.Mapping
 {
-    public class AccountAmountTypeMap : IEntityTypeConfiguration<AccountAmountType>
+    public class AmountTypeWalletMap : IEntityTypeConfiguration<AmountTypeWallet>
     {
-        public void Configure(EntityTypeBuilder<AccountAmountType> builder)
+        public void Configure(EntityTypeBuilder<AmountTypeWallet> builder)
         {
             builder.HasKey(a => a.Id);
             builder.Property(a => a.Id).ValueGeneratedOnAdd(); ; // bir bir artmasını sağlamaktadır.
-
-            builder.Property(a => a.Amount).IsRequired(true);
-
-            builder.ToTable("AccountAmountTypes");
+     
+            builder.ToTable("AmountTypeWallets");
         }
     }
 }

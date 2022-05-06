@@ -14,7 +14,7 @@
                     @using (Html.BeginForm("Register", "Login", FormMethod.Post))
                     {
                         <div class="form-sample">
-                             <div class="form-group">
+                            <div class="form-group">
                                 <b>@Html.LabelFor(x => x.TCNo)</b>
                                 @Html.TextBoxFor(x => x.TCNo, new { @class = "form-control" })<br />
                             </div>
@@ -25,14 +25,14 @@
                             <div class="form-group">
                                 <b>@Html.LabelFor(x => x.Surname)</b>
                                 @Html.TextBoxFor(x => x.Surname, new { @class = "form-control" })<br />
-                            </div>                          
+                            </div>
                             <div class="form-group">
                                 <b>@Html.LabelFor(x => x.UserPassword)</b>
                                 @Html.TextBoxFor(x => x.UserPassword, new { @class = "form-control", placeholder = "Parola", type = "Password" })<br />
                             </div>
                         </div>
                         <div class="text-center" style="background-color:white">
-                            <button class="btn btn-info">Kayıt Ol</button>
+                            <button class="btn btn-info">Müşteri Ol</button>
                         </div>
                     }
                 </div>

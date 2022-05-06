@@ -9,22 +9,19 @@ using System.Threading.Tasks;
 
 namespace InternetBankaciligi.Data.Concrete.EntityFramework.Mapping
 {
-    public class AccountMap : IEntityTypeConfiguration<Account>
+    public class WalletMap :IEntityTypeConfiguration<Wallet>
     {
-        public void Configure(EntityTypeBuilder<Account> builder)
+        public void Configure(EntityTypeBuilder<Wallet> builder)
         {
             builder.HasKey(a => a.Id);
             builder.Property(a => a.Id).ValueGeneratedOnAdd();//bir bir artmasını sağlıyor
 
-            builder.HasOne<User>(a => a.User).WithMany(c => c.Accounts ).HasForeignKey(a => a.UserId);
-            builder.HasOne<Wallet>(a => a.Wallet).WithOne(c => c.Account)
-                .HasForeignKey<Wallet>(v => v.AccountId);
+
 
             builder.Property(a => a.IsDeleted).IsRequired(true);
             builder.Property(a => a.IsActive).IsRequired(true);
 
-            builder.ToTable("Accounts");
-
+            builder.ToTable("Wallets");
         }
     }
 }

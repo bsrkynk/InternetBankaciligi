@@ -20,6 +20,11 @@ namespace InternetBankaciligi.Host.Extensions
             serviceCollection.AddDbContext<InternetBankaciligiContext>();
             serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
             serviceCollection.AddScoped<IUserService, UserManager>();
+            serviceCollection.AddScoped<IAccountService, AccountManager>();
+            serviceCollection.AddScoped<IAmountTypeWalletService, AmountTypeWalletManager>();
+            serviceCollection.AddScoped<IWalletService, WalletManager>();
+            serviceCollection.AddScoped<IAmountTypeService, AmountTypeManager>();
+            serviceCollection.AddScoped<ITransactionService, TransactionManager>();
             return serviceCollection;
         }
     }

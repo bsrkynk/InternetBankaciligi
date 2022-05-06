@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InternetBankaciligi.Data.Abstract
 {
-    public interface IAccountAmountTypeRepository: IEntityRepository<AccountAmountType>
+    public interface IWalletRepository: IEntityRepository<Wallet>
     {
     }
 }

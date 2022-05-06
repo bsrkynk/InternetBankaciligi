@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InternetBankaciligi.Entities.Dtos;
 
 namespace InternetBankaciligi.Host.Users.Abstract
 {
-    public interface IUserService
+    public interface IWalletService
     {
-        Task<int> Add(UserAddDto userAddDto);
-        Task<int> SignInUser(SignInUserDto signInUserDto);
+        Task<int> InitialWalletCreate(int portfolioId);
+        Task<int> GetCreatedWalletId(int accountId);
     }
 }

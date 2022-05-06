@@ -18,15 +18,16 @@ namespace InternetBankaciligi.Data.Concrete.EntityFramework.Mapping
             builder.Property(a => a.Id).ValueGeneratedOnAdd();//bir bir artmasını sağlıyor
             builder.Property(a => a.Amount).IsRequired(true);
             builder.Property(a => a.TransactionTypeName).HasMaxLength(100);
-            builder.HasIndex(a => a.TransactionTypeName).IsUnique(true);
+            builder.HasIndex(a => a.TransactionTypeName).IsUnique(false);
             builder.Property(a => a.TransactionTypeName).IsRequired(true);
             builder.Property(a => a.IsDeleted).IsRequired(true);
             builder.Property(a => a.IsActive).IsRequired(true);
 
 
             builder.HasOne<Account>(a => a.Account).WithMany(c => c.Transactions).HasForeignKey(a => a.AccountId);
-            builder.HasOne<AmountType>(a => a.AmountType).WithMany(c => c.Transactions).HasForeignKey(a => a.AmountTypeId);
 
+            builder.Property(a => a.IsDeleted).IsRequired(true);
+            builder.Property(a => a.IsActive).IsRequired(true);
             builder.ToTable("Transactions");
         }
     }

@@ -8,11 +8,12 @@ namespace InternetBankaciligi.Data.Abstract
 {
     public interface IUnitOfWork : IAsyncDisposable
     {
-        IAccountAmountTypeRepository AccountAmountTypes { get; }
+        IAmountTypeWallet AmountTypeWallets { get; }
         IAccountRepository Accounts { get; }
         IAmountTypeRepository AmountTypes { get; }
         ITransactionRepository Transactions { get; }
         IUserRepository Users { get; }
+        IWalletRepository Wallets { get; }
         Task<int> SaveAsync();
     }
 }

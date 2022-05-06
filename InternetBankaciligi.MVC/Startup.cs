@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using InternetBankaciligi.Host.Extensions;
+using InternetBankaciligi.MVC.ViewModels;
 
 namespace InternetBankaciligi.MVC
 {
@@ -22,7 +23,7 @@ namespace InternetBankaciligi.MVC
 
             services.AddControllersWithViews();
             services.LoadMyServices();
-            //services.AddScoped<PortfolioViewModel, PortfolioViewModel>();
+            services.AddScoped<AccountViewModel, AccountViewModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,18 +13,18 @@ namespace InternetBankaciligi.Data.Concrete
     {
 
         private readonly InternetBankaciligiContext _context;
-        private AccountAmountTypeRepository _accountAmountTypeRepository;
+        private AmountTypeWalletRepository _accountAmountTypeRepository;
         private AccountRepository _accountRepository;
         private AmountTypeRepository _amountTypeRepository;
         private TransactionRepository _transactionRepository;
         private UserRepository _userRepository;
-
+        private WalletRepository _walletRepository;
         public UnitOfWork(InternetBankaciligiContext context)
         {
             _context = context;
         }
 
-        public IAccountAmountTypeRepository AccountAmountTypes => _accountAmountTypeRepository ?? new AccountAmountTypeRepository(_context);
+        public IAmountTypeWallet AmountTypeWallets => _accountAmountTypeRepository ?? new AmountTypeWalletRepository(_context);
 
         public IAccountRepository Accounts => _accountRepository ?? new AccountRepository(_context);
 
@@ -34,6 +34,8 @@ namespace InternetBankaciligi.Data.Concrete
         public ITransactionRepository Transactions => _transactionRepository ?? new TransactionRepository(_context);
 
         public IUserRepository Users => _userRepository ?? new UserRepository(_context);
+
+        public IWalletRepository Wallets => _walletRepository ?? new WalletRepository(_context);
 
 
         public async ValueTask DisposeAsync()
