@@ -34,6 +34,8 @@ namespace InternetBankaciligi.Host.Users.Concrete
             user.Accounts = null;
             user.IsActive = true;
             user.IsDeleted = false;
+            string iban = IbanCalculator.GenerateIban(user.CustomerNo);
+
             await _unitOfWork.Users.AddAsync(user);
             await _unitOfWork.SaveAsync();
             return user.Id;
