@@ -16,18 +16,21 @@ namespace InternetBankaciligi.Host.Users.Concrete
         public enum Side
         {
             Deposit = 1,
-            Drawing = 2
+            Drawing = 2,
+            Transfer= 3
         }
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAmountTypeService _amountTypeService;
         private readonly IWalletService _walletService;
         private readonly IAmountTypeWalletService _amountTypeWalletService;
-        public TransactionManager(IUnitOfWork unitOfWork, IAmountTypeService amountTypeService, IWalletService walletService, IAmountTypeWalletService amountTypeWalletService)
+        private readonly IAccountService _accountService;
+        public TransactionManager(IUnitOfWork unitOfWork, IAmountTypeService amountTypeService, IWalletService walletService, IAmountTypeWalletService amountTypeWalletService,IAccountService accountService)
         {
             _unitOfWork = unitOfWork;
             _amountTypeService = amountTypeService;
             _walletService = walletService;
             _amountTypeWalletService = amountTypeWalletService;
+            _accountService = accountService;
         }
         public async Task<bool> ManageTransaction(CreateTransactionDto addTransactionDto, int instanceAccountId)
         {
@@ -47,7 +50,13 @@ namespace InternetBankaciligi.Host.Users.Concrete
                 await DoWalletTransaction(addTransactionDto, unifiedWalletCoin);
                 return true;
             }
-            else if (addTransactionDto.TransactionType != "Drawing")
+            else if (addTransactionDto.TransactionType == "Deposit")
+            {
+                addTransactionDto.IsSuccess = true;
+                await DoWalletTransaction(addTransactionDto, unifiedWalletCoin);
+                return true;
+            }
+            else if (addTransactionDto.TransactionType == "Transfer")
             {
                 addTransactionDto.IsSuccess = true;
                 await DoWalletTransaction(addTransactionDto, unifiedWalletCoin);
@@ -85,6 +94,10 @@ namespace InternetBankaciligi.Host.Users.Concrete
             {
                 await ManageProccess(createTransactionDto, joinedAmountTypeWallet, Side.Drawing);
             }
+            else if (createTransactionDto.TransactionType == "Transfer")
+            {
+                await ManageProccess(createTransactionDto, joinedAmountTypeWallet, Side.Transfer);
+            }
         }
         public async Task ManageProccess(CreateTransactionDto createTransactionDto, IEnumerable<AmountTypeWalletJoin> joinedAmountTypeWallets, Side side)
         {
@@ -100,12 +113,12 @@ namespace InternetBankaciligi.Host.Users.Concrete
                 totalWelthOfWallet = totalWelthOfWallet + (side == Side.Deposit ? 1 : -1) * double.Parse(createTransactionDto.TotalAmount, CultureInfo.InvariantCulture);
                 wallet.TotalWealth = totalWelthOfWallet.ToString(CultureInfo.InvariantCulture);
 
-                //ilgili coinin toplam adet sayısı
+                //ilgili paranın toplam adet sayısı
                 var amountOfCoin = double.Parse(joinedCoinWallet.AmountOfAmountType, CultureInfo.InvariantCulture);
                 amountOfCoin = amountOfCoin + (side == Side.Deposit ? 1 : -1) * double.Parse(createTransactionDto.AmountTypeAmount, CultureInfo.InvariantCulture);
                 amountTypeWallet.AmountOfAmountType = amountOfCoin.ToString(CultureInfo.InvariantCulture);
 
-                //ilgili coinini toplam sahip olunan fiyat miktarı
+                //ilgili paranın toplam sahip olunan fiyat miktarı
                 var totalWelthOfCoin = double.Parse(joinedCoinWallet.TotalWelthOfAmountType, CultureInfo.InvariantCulture);//ilgili coininin total sahip olunan fiyatı
                 totalWelthOfCoin = totalWelthOfCoin + (side == Side.Deposit ? 1 : -1) * double.Parse(createTransactionDto.TotalAmount, CultureInfo.InvariantCulture);
                 amountTypeWallet.TotalWelthOfAmountType = totalWelthOfCoin.ToString(CultureInfo.InvariantCulture);//ilgili coinin total sahip olunan yeni fiyatı (coinwallet tablosuna kaydolur)
@@ -129,6 +142,14 @@ namespace InternetBankaciligi.Host.Users.Concrete
             await _unitOfWork.Wallets.UpdateAsync(wallet); //.ContinueWith(t=>_UnitOfWork.SaveAsync())
             await _unitOfWork.SaveAsync(); //ContinueWith(x =>
 
+            if(side==Side.Transfer)
+            {
+                var accountId = await _accountService.GetAccountIdWithIbanFromAccount(createTransactionDto.Iban);
+                createTransactionDto.TransactionType = "Deposit"; //eklenecek
+               await ManageTransaction(createTransactionDto, accountId);
+            }
+
         }
+     
     }
 }

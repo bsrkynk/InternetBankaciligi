@@ -38,8 +38,7 @@ namespace InternetBankaciligi.Host.Users.Concrete
             {
                 AmountType addAmountType = new AmountType
                 {
-                    AmountName = addAmountTypeDto.AmountTypeName,
-                    AmountPrice = addAmountTypeDto.AmountTypePrice
+                    AmountName = addAmountTypeDto.AmountTypeName
                 };
                 await _unitOfWork.AmountTypes.AddAsync(addAmountType);
                 await _unitOfWork.SaveAsync();

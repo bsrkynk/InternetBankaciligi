@@ -69,12 +69,32 @@ namespace InternetBankaciligi.MVC.Controllers
         }     
         public async Task<IActionResult> BeginTransaction(CreateTransactionDto createTransactionDto)
         {
+            createTransactionDto.AmountTypeAmount = createTransactionDto.TotalAmount;
             var accountId = Convert.ToInt32(HttpContext.Session.GetInt32("AccountId"));
             createTransactionDto.TransactionType = "Deposit"; //para yatırma
             var checkAmount = await _transactionService.ManageTransaction(createTransactionDto, accountId);
             ViewBag.type = checkAmount;
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> DrawingTransaction(CreateTransactionDto createTransactionDto)
+        {
+            createTransactionDto.AmountTypeAmount = createTransactionDto.TotalAmount;
 
+            var accountId = Convert.ToInt32(HttpContext.Session.GetInt32("AccountId"));
+            createTransactionDto.TransactionType = "Drawing"; //para yatırma
+            var checkAmount = await _transactionService.ManageTransaction(createTransactionDto, accountId);
+            ViewBag.type = checkAmount;
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> TransferTransaction(CreateTransactionDto createTransactionDto)
+        {
+            createTransactionDto.AmountTypeAmount = createTransactionDto.TotalAmount;
+
+            var accountId = Convert.ToInt32(HttpContext.Session.GetInt32("AccountId"));
+            createTransactionDto.TransactionType = "Transfer"; //para transfer
+            var checkAmount = await _transactionService.ManageTransaction(createTransactionDto, accountId);
+            ViewBag.type = checkAmount;
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -14,5 +14,6 @@ namespace InternetBankaciligi.Entities.Dtos
         public string TotalAmount { get; set; }
         public string TransactionType { get; set; }
         public bool IsSuccess { get; set; }
+        public string Iban { get; set; }
     }
 }

@@ -34,6 +34,18 @@ namespace InternetBankaciligi.Host.Users.Concrete
             var result = await _unitOfWork.Accounts.GetAllAsync(a => a.Id == accountId);
             return result.ToList();
         }
+        public async Task<int>  GetWalletIdWithIbanFromAccount(string iban)
+        {
+            var result = await _unitOfWork.Accounts.GetAsync(a => a.Iban == iban);
+            var walletId = result.WalletId;
+            return  walletId;
+        }
+        public async Task<int> GetAccountIdWithIbanFromAccount(string iban)
+        {
+            var result = await _unitOfWork.Accounts.GetAsync(a => a.Iban == iban);
+            var walletId = result.Id;
+            return walletId;
+        }
 
         public async Task AddAccount(CreateAccountDto createAccountDto)
         {
@@ -41,6 +53,7 @@ namespace InternetBankaciligi.Host.Users.Concrete
             {
                 AccountName = createAccountDto.AccountName,
                 UserId = createAccountDto.UserId,
+
                 IsActive = true,
                 IsDeleted = false
             };
@@ -61,8 +74,10 @@ namespace InternetBankaciligi.Host.Users.Concrete
                 IsActive = true,
                 IsDeleted = false,
                 WalletId = createdAccount.WalletId,
+                Iban = IbanCalculator.GenerateIban(createdAccount.Id.ToString()),
                 Id = createdAccount.Id
             };
+
             await _unitOfWork.Accounts.UpdateAsync(acountss);
             await _unitOfWork.SaveAsync();
         }

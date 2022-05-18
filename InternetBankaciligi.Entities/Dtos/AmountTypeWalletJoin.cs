@@ -18,5 +18,6 @@ namespace InternetBankaciligi.Entities.Dtos
         public string AmountOfAmountType { get; set; }  
         public string AvarageBuyPrice { get; set; }
         public string AmountTypeName { get; set; }
+        public string Iban { get; set; }
     }
 }

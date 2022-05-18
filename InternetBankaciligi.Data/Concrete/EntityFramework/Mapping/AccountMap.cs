@@ -18,9 +18,9 @@ namespace InternetBankaciligi.Data.Concrete.EntityFramework.Mapping
 
             builder.HasOne<User>(a => a.User).WithMany(c => c.Accounts ).HasForeignKey(a => a.UserId);
             builder.HasOne<Wallet>(a => a.Wallet).WithOne(c => c.Account)
-                .HasForeignKey<Wallet>(v => v.AccountId);
-
+                .HasForeignKey<Wallet>(v => v.AccountId);     
             builder.Property(a => a.IsDeleted).IsRequired(true);
+
             builder.Property(a => a.IsActive).IsRequired(true);
 
             builder.ToTable("Accounts");

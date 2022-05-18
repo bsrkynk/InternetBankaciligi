@@ -3,14 +3,16 @@ using InternetBankaciligi.Data.Concrete.EntityFramework.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InternetBankaciligi.Data.Migrations
 {
     [DbContext(typeof(InternetBankaciligiContext))]
-    partial class InternetBankaciligiContextModelSnapshot : ModelSnapshot
+    [Migration("20220518201249_ibaneklendi2")]
+    partial class ibaneklendi2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,6 +46,7 @@ namespace InternetBankaciligi.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Iban")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")

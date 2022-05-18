@@ -13,5 +13,7 @@ namespace InternetBankaciligi.Host.Users.Abstract
         Task<List<Account>> GetAllUserAccounts(int userId);
         Task<List<Account>> GetUserAccount(int userId);
         public Task AddAccount(CreateAccountDto createAccountDto);
+        public  Task<int> GetAccountIdWithIbanFromAccount(string iban);
+        public  Task<int> GetWalletIdWithIbanFromAccount(string iban);
     }
 }

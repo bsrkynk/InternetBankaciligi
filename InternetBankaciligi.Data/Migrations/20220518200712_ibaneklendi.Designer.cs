@@ -3,14 +3,16 @@ using InternetBankaciligi.Data.Concrete.EntityFramework.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InternetBankaciligi.Data.Migrations
 {
     [DbContext(typeof(InternetBankaciligiContext))]
-    partial class InternetBankaciligiContextModelSnapshot : ModelSnapshot
+    [Migration("20220518200712_ibaneklendi")]
+    partial class ibaneklendi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

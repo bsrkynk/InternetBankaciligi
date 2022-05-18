@@ -14,7 +14,7 @@ namespace InternetBankaciligi.Entities.Concrete
         public User User { get; set; }
         public Wallet Wallet { get; set; }
         public int  WalletId { get; set; }
-        
+        public string Iban { get; set; }
         //public string AccountTypeName { get; set; }
         //public ICollection<AmountType> AmountTypes { get; set; }
         public ICollection<Transaction> Transactions { get; set; }
