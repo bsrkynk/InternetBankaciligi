@@ -16,7 +16,7 @@ using System.Net;
 namespace InternetBankaciligi.Host.Extensions
 {
     [RoutePrefix("/api/InternetBankaciligi")]
-    public class APIHelper
+    public class APIHelper : Controller
     {
         [HttpPost]
         [Route("/Home")]

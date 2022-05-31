@@ -1,4 +1,6 @@
-﻿using InternetBankaciligi.Entities.Dtos;
+﻿using InternetBankaciligi.Entities.API;
+using InternetBankaciligi.Entities.Dtos;
+using InternetBankaciligi.Host.Extensions;
 using InternetBankaciligi.Host.Users.Abstract;
 using InternetBankaciligi.MVC.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -7,8 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.WebPages.Html;
-
+using SelectListItem = Microsoft.AspNetCore.Mvc.Rendering.SelectListItem;
 namespace InternetBankaciligi.MVC.Controllers
 {
     public class Varliklar : Controller
@@ -48,18 +49,21 @@ namespace InternetBankaciligi.MVC.Controllers
                 _accountViewModel.UserAccounts = account;
             }
 
-            var amountTypes = await _amountTypeService.GetAllAmountTypes();
-            var amountNames = (from i in amountTypes.ToList()
+            List<ExchangeRateInfo> exchangeRateInfos = APIHelper.HomeIndex();
+
+            var amountNames = (from i in exchangeRateInfos.ToList()
                              select new SelectListItem
                              {
-                                 Text = i.AmountTypeName
+                                 Text = i.Isim
                              }).ToList();
             ViewBag.dgr = amountNames;
             _accountViewModel.AmountTypeWallets = await _amountTypeWalletService.GetUserWallet(id);
 
             _accountViewModel.CheckAccountPartial = check;
             return View(_accountViewModel);
+
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateAccount(AccountViewModel accountViewModel)
         {

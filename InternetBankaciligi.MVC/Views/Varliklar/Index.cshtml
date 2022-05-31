@@ -214,9 +214,13 @@
                                                         {
                                                             <p style="color: black"><b>Para Seçiniz</b></p>@*, @readonly = "readonly"*@
 
-                                                            @Html.TextBoxFor(m => m.CreateTransactionDto.AmountTypeName, new { @type = "text", @id = "txtPrice" })
+                                                         
+                                                            <p style="color: black"><b>Para Seçiniz</b></p>@*, @readonly = "readonly"*@
+                                                            @Html.DropDownListFor(m => m.CreateTransactionDto.AmountTypeName,
+                                                                (List<SelectListItem>)ViewBag.dgr, new { @class = "form-control", id = "txtPrice", @onchange = "DdlChange(this.value,this.id)" })<br />
+
                                                             @*@Html.DropDownListFor(x => x.CreateTransactionDto.AmountTypeName,
-                                                                (List<SelectListItem>) ViewBag.dgr, new { @class = "form-control", id = "buyAmountType", @onchange = "DdlChange(this.value,this.id)" })*@<br />
+            (List<SelectListItem>) ViewBag.dgr, new { @class = "form-control", id = "buyAmountType", @onchange = "DdlChange(this.value,this.id)" })*@<br />
 
                                                             <p><b></b></p>
                                                             <p style="color: black"><b>Yatırmak İstediğiniz Miktar</b></p>
@@ -232,17 +236,17 @@
                                                         {
                                                             <p style="color: black"><b>Para Seçiniz</b></p>@*, @readonly = "readonly"*@
 
-                                                            @Html.TextBoxFor(m => m.CreateTransactionDto.AmountTypeName, new { @type = "text", @id = "txtPrice" })
-                                                            @*@Html.DropDownListFor(x => x.CreateTransactionDto.AmountTypeName,
-                                                                (List<SelectListItem>) ViewBag.dgr, new { @class = "form-control", id = "buyAmountType", @onchange = "DdlChange(this.value,this.id)" })*@<br />
+                                                            <p style="color: black"><b>Para Seçiniz</b></p>@*, @readonly = "readonly"*@
+                                                            @Html.DropDownListFor(m => m.CreateTransactionDto.AmountTypeName,
+                                                                (List<SelectListItem>)ViewBag.dgr, new { @class = "form-control", id = "txtPrice", @onchange = "DdlChange(this.value,this.id)" })<br />
+                                                           <br />
 
                                                             <p><b></b></p>
 
                                                             <p><b></b></p>
                                                             <p style="color: black"><b>Çekmek İstediğiniz Miktar</b></p>
                                                             @Html.TextBoxFor(m => m.CreateTransactionDto.TotalAmount, new { @type = "text", @id = "txtTotalAmount" })
-                                                            @*@Html.TextBoxFor(m => m.CreateTransactionDto.TransactionType, new { @Value = "4" })*@
-
+                                                           
                                                             <p><b></b></p>
                                                             <button class="btn btn-primary">Para Çek</button>
                                                         }
@@ -250,22 +254,19 @@
                                                     <div class="tab-pane" id="transfer">
                                                         @using (Html.BeginForm("TransferTransaction", "Varliklar", FormMethod.Post))
                                                         {
-
-
-                                                            @*@Html.DropDownListFor(x => x.CreateTransactionDto.AmountTypeName,
-            (List<SelectListItem>) ViewBag.dgr, new { @class = "form-control", id = "buyAmountType", @onchange = "DdlChange(this.value,this.id)" })*@<br />
-
+                                                         <br />
                                                             <p style="color: black"><b>Para Seçiniz</b></p>@*, @readonly = "readonly"*@
 
-                                                            @Html.TextBoxFor(m => m.CreateTransactionDto.AmountTypeName, new { @type = "text", @id = "txtPrice" })
+                                                            <p style="color: black"><b>Para Seçiniz</b></p>@*, @readonly = "readonly"*@
+                                                            @Html.DropDownListFor(m => m.CreateTransactionDto.AmountTypeName,
+                                                                (List<SelectListItem>)ViewBag.dgr, new { @class = "form-control", id = "txtPrice", @onchange = "DdlChange(this.value,this.id)" })<br />
 
                                                             @*@Html.TextBoxFor(m => m.CreateTransactionDto.TransactionType, new { @Value = "4" })*@
 
                                                             <p style="color: black"><b>Iban Giriniz</b></p>@*, @readonly = "readonly"*@
 
                                                             @Html.TextBoxFor(m => m.CreateTransactionDto.Iban, new { @type = "text", @id = "txtPrice" })
-                                                            @*@Html.DropDownListFor(x => x.CreateTransactionDto.AmountTypeName,
-            (List<SelectListItem>) ViewBag.dgr, new { @class = "form-control", id = "buyAmountType", @onchange = "DdlChange(this.value,this.id)" })*@<br />
+                                                            <br />
                                                             <p style="color: black"><b>Göndermek İstediğiniz Miktar</b></p>
                                                             @Html.TextBoxFor(m => m.CreateTransactionDto.TotalAmount, new { @type = "text", @id = "txtAmount", @onchange = "CalculateTotalAmount(this.value,this.id)" })
                                                             <p><b></b></p>
