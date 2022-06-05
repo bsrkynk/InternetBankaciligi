@@ -1,6 +1,12 @@
-﻿
-@using Microsoft.AspNetCore.Routing.Internal
+﻿@using Microsoft.AspNetCore.Routing.Internal
 @model InternetBankaciligi.MVC.ViewModels.AccountViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using InternetBankaciligi.MVC.Controllers
+@using Microsoft.Extensions.Localization
+
+@inject IStringLocalizer<InternetBankaciligi.MVC.Controllers.Varliklar> Localizer
+
+
 
 <script type="text/javascript">
 
@@ -123,7 +129,7 @@
 
                     <ul class="menu-inner py-1">
                         <li class="nav-item">
-                            <button type="button" class="btn btn-dark" style="margin-top: 10px; margin-left: 5px" id="btnCreateAccount" data-toggle="modal" data-target="#createAccountModal">Hesap Oluştur</button>
+                            <button type="button" class="btn btn-dark" style="margin-top: 10px; margin-left: 5px" id="btnCreateAccount" data-toggle="modal" data-target="#createAccountModal"> @Localizer["hesap_olustur"]</button>
                         </li>
 
 
@@ -160,19 +166,19 @@
                         @if (Model.CheckAccountPartial == true)
                         {
                             <div class="card">
-                                <h9 class="card-header">Mevcut Bakiye: @Model.AmountTypeWallets.Select(x => x.TotalWelthOfWallet).FirstOrDefault()</h9>
-                                <h9 class="card-header">Hesap Iban: @Model.UserAccounts.Select(x => x.Iban).FirstOrDefault()</h9>
+                                <h9 class="card-header"> @Localizer["mevcut_bakiye"]e: @Model.AmountTypeWallets.Select(x => x.TotalWelthOfWallet).FirstOrDefault()</h9>
+                                <h9 class="card-header"> @Localizer["hesap_iban"]: @Model.UserAccounts.Select(x => x.Iban).FirstOrDefault()</h9>
 
                                 <div>
-                                    <button id="btnCreateTransaction" data-toggle="modal" data-target="#createTransactionModal" class="btn btn-dark" style="float: right; margin-bottom: 5px; margin-right: 15px">İşlem Yap </button>
+                                    <button id="btnCreateTransaction" data-toggle="modal" data-target="#createTransactionModal" class="btn btn-dark" style="float: right; margin-bottom: 5px; margin-right: 15px">@Localizer["islem_yap"] </button>
                                 </div>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Para Adı</th>
-                                                <th>Para Miktarı</th>
-                                                <th>Sahip Olunan Toplam Para Fiyatı</th>
+                                                <th> @Localizer["para_adi"]</th>
+                                                <th> @Localizer["para_miktari"]</th>
+                                                <th> @Localizer["toplam_para_fiyati"]</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
@@ -197,86 +203,86 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h3 class="modal-title" id="exampleModalCenterTitle">İşlem Ekle</h3>
+                                                <h3 class="modal-title" id="exampleModalCenterTitle">@Localizer["islem_yap"]</h3>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
                                                 <ul class="nav nav-tabs" id="tabContent">
-                                                    <li class="active"><a href="#buy" data-toggle="tab">Para Yatır&nbsp;| </a></li>
-                                                    <li><a href="#sell" data-toggle="tab">&nbsp; Para Çek &nbsp;| </a></li>
-                                                    <li><a href="#transfer" data-toggle="tab">&nbsp; Transfer Et</a></li>
+                                                    <li class="active"><a href="#buy" data-toggle="tab">@Localizer["para_yatir"]&nbsp;| </a></li>
+                                                    <li><a href="#sell" data-toggle="tab">&nbsp; @Localizer["para_cek"]  &nbsp;| </a></li>
+                                                    <li><a href="#transfer" data-toggle="tab">&nbsp;  @Localizer["transfer_et"]</a></li>
                                                 </ul>
                                                 <div class="tab-content" style="background-color: lightskyblue">
                                                     <div class="tab-pane active" id="buy">
                                                         @using (Html.BeginForm("BeginTransaction", "Varliklar", FormMethod.Post))
                                                         {
-                                                            <p style="color: black"><b>Para Seçiniz</b></p>@*, @readonly = "readonly"*@
+                                                            <p style="color: black"><b>@Localizer["para_seciniz"]</b></p>@*, @readonly = "readonly"*@
 
-                                                         
-                                                            <p style="color: black"><b>Para Seçiniz</b></p>@*, @readonly = "readonly"*@
+
+                                                            <p style="color: black"><b> @Localizer["para_seciniz"]</b></p>@*, @readonly = "readonly"*@
                                                             @Html.DropDownListFor(m => m.CreateTransactionDto.AmountTypeName,
                                                                 (List<SelectListItem>)ViewBag.dgr, new { @class = "form-control", id = "txtPrice", @onchange = "DdlChange(this.value,this.id)" })<br />
 
                                                             @*@Html.DropDownListFor(x => x.CreateTransactionDto.AmountTypeName,
-            (List<SelectListItem>) ViewBag.dgr, new { @class = "form-control", id = "buyAmountType", @onchange = "DdlChange(this.value,this.id)" })*@<br />
+                                                                (List<SelectListItem>) ViewBag.dgr, new { @class = "form-control", id = "buyAmountType", @onchange = "DdlChange(this.value,this.id)" })*@<br />
 
                                                             <p><b></b></p>
-                                                            <p style="color: black"><b>Yatırmak İstediğiniz Miktar</b></p>
+                                                            <p style="color: black"><b> @Localizer["yatirmak_istenen"]</b></p>
                                                             @Html.TextBoxFor(m => m.CreateTransactionDto.TotalAmount, new { @type = "text", @id = "txtAmount", @onchange = "CalculateTotalAmount(this.value,this.id)" })
                                                             <p><b></b></p>
 
                                                             <p><b></b></p>
-                                                            <button class="btn btn-primary">Para Yatır</button>
+                                                            <button class="btn btn-primary">@Localizer["para_yatir"]</button>
                                                         }
                                                     </div>
                                                     <div class="tab-pane" id="sell">
                                                         @using (Html.BeginForm("DrawingTransaction", "Varliklar", FormMethod.Post))
                                                         {
-                                                            <p style="color: black"><b>Para Seçiniz</b></p>@*, @readonly = "readonly"*@
+                                                            <p style="color: black"><b> @Localizer["para_seciniz"]</b></p>@*, @readonly = "readonly"*@
 
-                                                            <p style="color: black"><b>Para Seçiniz</b></p>@*, @readonly = "readonly"*@
+                                                            <p style="color: black"><b> @Localizer["para_seciniz"]</b></p>@*, @readonly = "readonly"*@
                                                             @Html.DropDownListFor(m => m.CreateTransactionDto.AmountTypeName,
                                                                 (List<SelectListItem>)ViewBag.dgr, new { @class = "form-control", id = "txtPrice", @onchange = "DdlChange(this.value,this.id)" })<br />
-                                                           <br />
+                                                            <br />
 
                                                             <p><b></b></p>
 
                                                             <p><b></b></p>
-                                                            <p style="color: black"><b>Çekmek İstediğiniz Miktar</b></p>
+                                                            <p style="color: black"><b>@Localizer["cekmek_istenen"]</b></p>
                                                             @Html.TextBoxFor(m => m.CreateTransactionDto.TotalAmount, new { @type = "text", @id = "txtTotalAmount" })
-                                                           
+
                                                             <p><b></b></p>
-                                                            <button class="btn btn-primary">Para Çek</button>
+                                                            <button class="btn btn-primary"> @Localizer["para_cek"]</button>
                                                         }
                                                     </div>
                                                     <div class="tab-pane" id="transfer">
                                                         @using (Html.BeginForm("TransferTransaction", "Varliklar", FormMethod.Post))
                                                         {
-                                                         <br />
-                                                            <p style="color: black"><b>Para Seçiniz</b></p>@*, @readonly = "readonly"*@
+                                                            <br />
+                                                            <p style="color: black"><b>@Localizer["para_seciniz"]</b></p>@*, @readonly = "readonly"*@
 
-                                                            <p style="color: black"><b>Para Seçiniz</b></p>@*, @readonly = "readonly"*@
+                                                            <p style="color: black"><b>@Localizer["para_seciniz"]</b></p>@*, @readonly = "readonly"*@
                                                             @Html.DropDownListFor(m => m.CreateTransactionDto.AmountTypeName,
                                                                 (List<SelectListItem>)ViewBag.dgr, new { @class = "form-control", id = "txtPrice", @onchange = "DdlChange(this.value,this.id)" })<br />
 
                                                             @*@Html.TextBoxFor(m => m.CreateTransactionDto.TransactionType, new { @Value = "4" })*@
 
-                                                            <p style="color: black"><b>Iban Giriniz</b></p>@*, @readonly = "readonly"*@
+                                                            <p style="color: black"><b> @Localizer["iban_gir"]</b></p>@*, @readonly = "readonly"*@
 
                                                             @Html.TextBoxFor(m => m.CreateTransactionDto.Iban, new { @type = "text", @id = "txtPrice" })
                                                             <br />
-                                                            <p style="color: black"><b>Göndermek İstediğiniz Miktar</b></p>
+                                                            <p style="color: black"><b> @Localizer["gondermek_istenen"]</b></p>
                                                             @Html.TextBoxFor(m => m.CreateTransactionDto.TotalAmount, new { @type = "text", @id = "txtAmount", @onchange = "CalculateTotalAmount(this.value,this.id)" })
                                                             <p><b></b></p>
-                                                            <button class="btn btn-primary">Transfer Et</button>
+                                                            <button class="btn btn-primary"> @Localizer["transfer_et"]</button>
                                                         }
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"> @Localizer["kapat"]</button>
                                             </div>
                                         </div>
                                     </div>
@@ -324,7 +330,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Hesap Oluştur</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle"> @Localizer["hesap_olustur"]</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -334,16 +340,16 @@
                     {
                         <div class="form-sample">
                             <div class="form-group">
-                                <p style="color: black"><b>Hesap İsmi</b></p>
+                                <p style="color: black"><b>@Localizer["hesap_ismi"]</b></p>
                                 @*@Html.LabelFor(x => x.createPortfolioDto.PortfolioName, new { @class = "form-control", TextWriter = "Portföy İsmi: " })*@
                                 @Html.TextBoxFor(x => x.CreateAccountDto.AccountName, new { @class = "form-control" })
                             </div>
                         </div>
-                        <button class="btn btn-primary" style="background-color: white; color: black">Oluştur</button>
+                        <button class="btn btn-primary" style="background-color: white; color: black">@Localizer["olustur"]</button>
                     }
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Çıkış</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> @Localizer["cikis"]</button>
 
                 </div>
             </div>

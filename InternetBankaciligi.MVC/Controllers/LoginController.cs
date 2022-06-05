@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 using InternetBankaciligi.Entities.Dtos;
 using InternetBankaciligi.Host.Users.Abstract;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Localization;
 
 namespace InternetBankaciligi.MVC.Controllers
 {
     public class LoginController : Controller
     {
+
+        private readonly IStringLocalizer<LoginController> _stringLocalizer;     
         private readonly IUserService _userService;
 
-        public LoginController(IUserService userService)
+        public LoginController(IUserService userService, IStringLocalizer<LoginController> stringLocalizer)
         {
             _userService = userService;
+            _stringLocalizer = stringLocalizer;
         }
 
         public IActionResult Index()
