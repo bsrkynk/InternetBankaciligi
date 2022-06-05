@@ -3,9 +3,12 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @using InternetBankaciligi.MVC.Controllers
 @using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Http
 
 @inject IStringLocalizer<InternetBankaciligi.MVC.Controllers.Varliklar> Localizer
-
+@{
+    string? username = Context.Session.GetString("USERID");
+}
 
 
 <script type="text/javascript">
@@ -37,20 +40,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-    <title>Chain Portföy Yönetim Uygulaması</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" href="~/assets/css/templatemo-chain-app-dev.css">
-    <link rel="stylesheet" href="~/assets/css/animated.css">
-    <link rel="stylesheet" href="~/assets/css/owl.css">
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
+    <title>EHB Bank </title>
+    <link href="assets/img/favicon.png" rel="icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Skydash Admin</title>
+
     <!-- plugins:css -->
     <link rel="stylesheet" href="~/vendors/feather/feather.css">
     <link rel="stylesheet" href="~/vendors/ti-icons/css/themify-icons.css">
@@ -129,9 +122,8 @@
 
                     <ul class="menu-inner py-1">
                         <li class="nav-item">
-                            <button type="button" class="btn btn-dark" style="margin-top: 10px; margin-left: 5px" id="btnCreateAccount" data-toggle="modal" data-target="#createAccountModal"> @Localizer["hesap_olustur"]</button>
+                            <button type="button" class="btn btn-dark" style="margin-top: 10px; margin-left: 25px" id="btnCreateAccount" data-toggle="modal" data-target="#createAccountModal"> @Localizer["hesap_olustur"]</button>
                         </li>
-
 
                         @foreach (var x in Model.UserAccounts)
                         {
@@ -158,6 +150,7 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <!-- Content -->
+                    <button onclick="location.href='@Url.Action("Logout", "Login")'" class="btn btn-dark" style="float: right; margin-bottom: 5px; margin-right: 15px">@Localizer["cikis_yap"] </button>
 
                     <div class="container-xxl flex-grow-1 container-p-y">
 
@@ -166,7 +159,7 @@
                         @if (Model.CheckAccountPartial == true)
                         {
                             <div class="card">
-                                <h9 class="card-header"> @Localizer["mevcut_bakiye"]e: @Model.AmountTypeWallets.Select(x => x.TotalWelthOfWallet).FirstOrDefault()</h9>
+                                <h9 class="card-header"> @Localizer["mevcut_bakiye"]: @Model.AmountTypeWallets.Select(x => x.TotalWelthOfWallet).FirstOrDefault()</h9>
                                 <h9 class="card-header"> @Localizer["hesap_iban"]: @Model.UserAccounts.Select(x => x.Iban).FirstOrDefault()</h9>
 
                                 <div>
@@ -218,15 +211,12 @@
                                                     <div class="tab-pane active" id="buy">
                                                         @using (Html.BeginForm("BeginTransaction", "Varliklar", FormMethod.Post))
                                                         {
-                                                            <p style="color: black"><b>@Localizer["para_seciniz"]</b></p>@*, @readonly = "readonly"*@
-
-
                                                             <p style="color: black"><b> @Localizer["para_seciniz"]</b></p>@*, @readonly = "readonly"*@
                                                             @Html.DropDownListFor(m => m.CreateTransactionDto.AmountTypeName,
                                                                 (List<SelectListItem>)ViewBag.dgr, new { @class = "form-control", id = "txtPrice", @onchange = "DdlChange(this.value,this.id)" })<br />
 
                                                             @*@Html.DropDownListFor(x => x.CreateTransactionDto.AmountTypeName,
-                                                                (List<SelectListItem>) ViewBag.dgr, new { @class = "form-control", id = "buyAmountType", @onchange = "DdlChange(this.value,this.id)" })*@<br />
+                                                (List<SelectListItem>) ViewBag.dgr, new { @class = "form-control", id = "buyAmountType", @onchange = "DdlChange(this.value,this.id)" })*@<br />
 
                                                             <p><b></b></p>
                                                             <p style="color: black"><b> @Localizer["yatirmak_istenen"]</b></p>

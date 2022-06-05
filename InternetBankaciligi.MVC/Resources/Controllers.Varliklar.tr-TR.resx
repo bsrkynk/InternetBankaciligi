@@ -123,6 +123,9 @@
   <data name="cikis" xml:space="preserve">
     <value>Çıkış</value>
   </data>
+  <data name="cikis_yap" xml:space="preserve">
+    <value>Çıkış Yap</value>
+  </data>
   <data name="gondermek_istenen" xml:space="preserve">
     <value>Göndermek İstediğiniz Miktar</value>
   </data>

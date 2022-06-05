@@ -50,14 +50,14 @@ namespace InternetBankaciligi.MVC.Controllers
                 return Redirect("/Varliklar/Index/");
             }
 
-            return Redirect("/Home/Index");
+            return Redirect("/Login/Index");
         }
 
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
 
-            return Redirect("/Home/Index");
+            return Redirect("/Login/Index");
 
         }
 

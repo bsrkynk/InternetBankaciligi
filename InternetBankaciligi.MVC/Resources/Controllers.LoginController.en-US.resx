@@ -120,6 +120,9 @@
   <data name="Ad" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="anasayfa_donus" xml:space="preserve">
+    <value>to Return to the HomePage</value>
+  </data>
   <data name="giris_yap" xml:space="preserve">
     <value>Log in</value>
   </data>
@@ -137,5 +140,8 @@
   </data>
   <data name="tc_kimlik" xml:space="preserve">
     <value>Identity Number</value>
+  </data>
+  <data name="tikla" xml:space="preserve">
+    <value>Click Here</value>
   </data>
 </root>

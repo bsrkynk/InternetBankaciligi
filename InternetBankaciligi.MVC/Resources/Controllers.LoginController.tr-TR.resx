@@ -120,6 +120,9 @@
   <data name="Ad" xml:space="preserve">
     <value>Adı</value>
   </data>
+  <data name="anasayfa_donus" xml:space="preserve">
+    <value>Anasayfaya Dönmek İçin</value>
+  </data>
   <data name="giris_yap" xml:space="preserve">
     <value>Giriş Yap</value>
   </data>
@@ -137,5 +140,8 @@
   </data>
   <data name="tc_kimlik" xml:space="preserve">
     <value>TC Kimlik Numarası</value>
+  </data>
+  <data name="tikla" xml:space="preserve">
+    <value>Tıklayınız</value>
   </data>
 </root>
