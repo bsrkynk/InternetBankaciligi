@@ -2,6 +2,7 @@
 using InternetBankaciligi.Entities.Dtos;
 using InternetBankaciligi.Host.Extensions;
 using InternetBankaciligi.Host.Users.Abstract;
+using InternetBankaciligi.MVC.Filters;
 using InternetBankaciligi.MVC.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 using SelectListItem = Microsoft.AspNetCore.Mvc.Rendering.SelectListItem;
 namespace InternetBankaciligi.MVC.Controllers
 {
+    [UserFilter]
     public class Varliklar : Controller
     {
 
@@ -61,6 +63,9 @@ namespace InternetBankaciligi.MVC.Controllers
                              {
                                  Text = i.Isim
                              }).ToList();
+            amountNames.Add(new SelectListItem { 
+                Text="TÜRK LİRASI"
+            });
             ViewBag.dgr = amountNames;
             _accountViewModel.AmountTypeWallets = await _amountTypeWalletService.GetUserWallet(id);
 

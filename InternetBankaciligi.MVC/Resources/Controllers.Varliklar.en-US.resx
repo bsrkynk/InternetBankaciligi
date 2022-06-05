@@ -123,6 +123,9 @@
   <data name="cikis" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="cikis_yap" xml:space="preserve">
+    <value>Log Out</value>
+  </data>
   <data name="gondermek_istenen" xml:space="preserve">
     <value>Amount to send</value>
   </data>
