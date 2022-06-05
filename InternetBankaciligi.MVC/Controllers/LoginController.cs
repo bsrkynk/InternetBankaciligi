@@ -24,7 +24,6 @@ namespace InternetBankaciligi.MVC.Controllers
 
         public IActionResult Index()
         {
-
             return View();
         }
 
@@ -44,13 +43,14 @@ namespace InternetBankaciligi.MVC.Controllers
         public async Task<IActionResult> SignIn(SignInUserDto signInUserDto)
         {
             var result = await _userService.SignInUser(signInUserDto);
+            ViewBag.res = result;
             if (result != -1)
             {
                 SaveDataWithSession(result);
                 return Redirect("/Varliklar/Index/");
             }
 
-            return Redirect("/Login/Index");
+            return View("Index");
         }
 
         public IActionResult Logout()

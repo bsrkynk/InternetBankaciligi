@@ -95,7 +95,7 @@ namespace InternetBankaciligi.MVC.Controllers
             createTransactionDto.AmountTypeAmount = createTransactionDto.TotalAmount;
 
             var accountId = Convert.ToInt32(HttpContext.Session.GetInt32("AccountId"));
-            createTransactionDto.TransactionType = "Drawing"; //para yatırma
+            createTransactionDto.TransactionType = "Drawing"; //para çemke
             var checkAmount = await _transactionService.ManageTransaction(createTransactionDto, accountId);
             ViewBag.type = checkAmount;
             return RedirectToAction("Index");
