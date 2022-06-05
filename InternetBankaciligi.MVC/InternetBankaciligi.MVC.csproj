@@ -9,6 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Globalization.CultureInfoCache" Version="1.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\InternetBankaciligi.Entities\InternetBankaciligi.Entities.csproj" />
     <ProjectReference Include="..\InternetBankaciligi.Host\InternetBankaciligi.Host.csproj" />
   </ItemGroup>

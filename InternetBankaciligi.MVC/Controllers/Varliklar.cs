@@ -5,6 +5,7 @@ using InternetBankaciligi.Host.Users.Abstract;
 using InternetBankaciligi.MVC.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,19 +15,23 @@ namespace InternetBankaciligi.MVC.Controllers
 {
     public class Varliklar : Controller
     {
+
+        private readonly IStringLocalizer<Varliklar> _stringLocalizer;
         private readonly IAccountService _accountService;
         private readonly IAmountTypeWalletService _amountTypeWalletService;
         private readonly IAmountTypeService _amountTypeService;
         private readonly ITransactionService _transactionService;
         private readonly AccountViewModel _accountViewModel;
 
-        public Varliklar(IAccountService accountService,AccountViewModel accountViewModel,IAmountTypeWalletService amountTypeWalletService, IAmountTypeService amountTypeService,ITransactionService transactionService)
+        public Varliklar(IAccountService accountService,AccountViewModel accountViewModel,IAmountTypeWalletService amountTypeWalletService, IAmountTypeService amountTypeService,ITransactionService transactionService, IStringLocalizer<Varliklar> stringLocalizer)
         {
+            
             _accountService = accountService;
             _accountViewModel = accountViewModel;
             _amountTypeWalletService = amountTypeWalletService;
             _amountTypeService = amountTypeService;
             _transactionService = transactionService;
+            _stringLocalizer = stringLocalizer;
         }
 
         [HttpGet]
